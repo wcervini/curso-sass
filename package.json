@@ -1,0 +1,18 @@
+{
+  "name": "curso-sass",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Walter Cervini <cerviniw@yahoo.com> (https://github.com/wcervini)",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-sass": "^4.1.0"
+  },
+  "devDependencies": {
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-watch": "^5.0.1"
+  }
+}
