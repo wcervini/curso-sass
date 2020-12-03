@@ -1,30 +1,32 @@
 'use strict';
- 
-var gulp = require('gulp');
+
+var gulp = require("gulp");
+var {src,dest} = require('gulp');
 var sass = require('gulp-sass');
 var concatCss = require('gulp-concat-css');
 var watch = require('gulp-watch');
 var sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const { series } = require('gulp');
- 
-sass.compiler = require('node-sass');
+const browserSync = require("browser-sync").create();
+ sass.compiler = require('node-sass');
  
 gulp.task('sass', function () {
-  return gulp.src('./src/scss/**/*.scss')
-    .pipe(sourcemaps.init({largeFile: true}))
+  return src('./src/scss/**/*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./src/css'));
+    .pipe(dest('./src/css'))
+    .pipe(browserSync.stream());
 });
  
-gulp.task('watch', function () {
+gulp.task('watchs', function () {
   return gulp.watch('./src/scss/**/*.scss', series(['sass',"concacss"]));
 });
 
-
 gulp.task('concacss', function () {
-  return gulp.src([
+  return src([
     './src/css/style.css',
     "./bower_components/normalize.css/normalize.css"
   ])
@@ -32,5 +34,17 @@ gulp.task('concacss', function () {
     .pipe(concatCss("bundle.css"))
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(dest('./dist/css'))
+    .pipe(browserSync.stream());
 });
+
+gulp.task('browser',series(['sass']),function() {
+    browserSync.init({
+      server: "./",
+    });
+    gulp.watch('./src/scss/style.scss',series([sass]));
+    // gulp.watch('./src/scss/style.scss', series(['concacss']));
+    // gulp.watch('./dist/css/bundle.css', series(['sass','concacss']));
+    gulp.watch('./index.html').on('change',browserSync.reload);
+});
+
