@@ -1,50 +1,65 @@
-'use strict';
+"use strict";
 
-var gulp = require("gulp");
-var {src,dest} = require('gulp');
-var sass = require('gulp-sass');
-var concatCss = require('gulp-concat-css');
-var watch = require('gulp-watch');
-var sourcemaps = require('gulp-sourcemaps');
-const cleanCSS = require('gulp-clean-css');
-const { series } = require('gulp');
-const browserSync = require("browser-sync").create();
- sass.compiler = require('node-sass');
- 
-gulp.task('sass', function () {
-  return src('./src/scss/**/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(sourcemaps.write())
-    .pipe(dest('./src/css'))
-    .pipe(browserSync.stream());
-});
- 
-gulp.task('watchs', function () {
-  return gulp.watch('./src/scss/**/*.scss', series(['sass',"concacss"]));
-});
+// Load plugins
+const autoprefixer = require("autoprefixer");
+const { stream } = require("browser-sync");
+const browsersync = require("browser-sync").create();
+const cp = require("child_process");
+const cssnano = require("cssnano");
+const del = require("del");
+const gulp = require("gulp");
+const imagemin = require("gulp-imagemin");
+const newer = require("gulp-newer");
+const plumber = require("gulp-plumber");
+const postcss = require("gulp-postcss");
+const rename = require("gulp-rename");
+const sass = require("gulp-sass");
+const {series,parallel} = require("gulp");
 
-gulp.task('concacss', function () {
+function css() {
+  return gulp.src("./src/scss/**/*.scss")
+    .pipe(plumber())
+    .pipe(sass({ outputStyle: "expanded" }))
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(gulp.dest("./src/css"))
+    .pipe(browsersync.stream());
+}
+
+// Watch files
+function watchFiles() {
+  gulp.watch("./src/scss/**/*.scss",css).on("change",browsersync.reload);
+  gulp.watch(["./index.html","./src/css/style.min.css"]).on("change",browsersync.reload); 
+}
+
+function concacss() {
   return src([
-    './src/css/style.css',
-    "./bower_components/normalize.css/normalize.css"
+    "./src/css/style.css",
+    "./bower_components/normalize.css/normalize.css",
   ])
     .pipe(sourcemaps.init())
     .pipe(concatCss("bundle.css"))
-    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(cleanCSS({ compatibility: "ie8" }))
     .pipe(sourcemaps.write())
-    .pipe(dest('./dist/css'))
-    .pipe(browserSync.stream());
-});
+    .pipe(dest("./dist/css"))
+    .pipe(browsersync.stream());
+}
 
-gulp.task('browser',series(['sass']),function() {
-    browserSync.init({
-      server: "./",
-    });
-    gulp.watch('./src/scss/style.scss',series([sass]));
-    // gulp.watch('./src/scss/style.scss', series(['concacss']));
-    // gulp.watch('./dist/css/bundle.css', series(['sass','concacss']));
-    gulp.watch('./index.html').on('change',browserSync.reload);
-});
+// Clean assets
+function clean() {
+  return del(["./src/css"]);
+}
 
+// BrowserSync
+function BrowserSync(done) {
+  browsersync.init({
+    server: "./"
+  });
+  done();
+}
+
+const watch = gulp.parallel(watchFiles, BrowserSync);
+
+exports.css = css;
+exports.watch = watch;
+exports.clean = clean;

@@ -1,4 +1,6 @@
-$main-color: #e74c3c;
+$main-color: #585858;
+$btn-primary: #00ced1;
+$btn-primary-dark: #05a1a7;
 $text-color-primary: white;
 $text-color-h1: #dbd6d6;
 @import url(https://fonts.googleapis.com/css?family=Inconsolata:200,300,regular,500,600,700,800,900);
@@ -14,27 +16,55 @@ $text-color-h1: #dbd6d6;
 }
 
 body {
-  background-color: #40586b;
+  background-color: $main-color;
+  color: $text-color-primary;
   font-size: 20px;
   width: 90%;
   max-width: 1000px;
   margin: auto;
 }
 
-div {
-  header {
-	  padding: 20px,0;
-    logo {
-	  font-size: 1em;
-    }
-
-    nav {
-      font-size: 0.5em;
-      a {
-        background-color: rgb(22, 53, 230);
-        color: #000;
-        text-decoration: none;
-      }
+header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  justify-content: space-between;
+  div.logo {
+    font-size: 1.5em;
+    h1 {
+      margin-left: 15px;
+      font-size: 1.5em;
     }
   }
+  nav {
+    padding-top: 20px;
+    height: auto;
+    justify-content: space-between;
+  }
+}
+
+.btn {
+  background-color: $btn-primary;
+  border-radius: 5px;
+  color: $text-color-primary;
+  padding: 10px;
+  text-decoration: none;
+  &:hover {
+	background-color: $btn-primary-dark;
+	color: #585858;
+  }
+}
+
+section.main{
+	text-align: justify;
+	font-size: 1em;
+	article{
+		margin-bottom: 30px;
+		h2{
+			color: #05a1a7;
+			font-size: 1.8em;
+			padding-bottom: 10px;
+		}
+	}
 }
