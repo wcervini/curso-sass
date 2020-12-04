@@ -1,0 +1,13 @@
+/* Coolors Exported Palette - https://coolors.co/8dbd6d-30ab7e-b4e398-228a03-abdbb2 */
+
+/* CSV */
+8dbd6d,30ab7e,b4e398,228a03,abdbb2
+
+/* Array */
+["8dbd6d","30ab7e","b4e398","228a03","abdbb2"]
+
+/* Object */
+{"Pistachio":"8dbd6d","Green Crayola":"30ab7e","Granny Smith Apple":"b4e398","India Green":"228a03","Celadon":"abdbb2"}
+
+/* Extended Array */
+[{"name":"Pistachio","hex":"8dbd6d","rgb":[141,189,109],"cmyk":[25,0,42,26],"hsb":[96,42,74],"hsl":[96,38,58],"lab":[72,-30,35]},{"name":"Green Crayola","hex":"30ab7e","rgb":[48,171,126],"cmyk":[72,0,26,33],"hsb":[158,72,67],"hsl":[158,56,43],"lab":[63,-44,14]},{"name":"Granny Smith Apple","hex":"b4e398","rgb":[180,227,152],"cmyk":[21,0,33,11],"hsb":[98,33,89],"hsl":[98,57,74],"lab":[85,-28,32]},{"name":"India Green","hex":"228a03","rgb":[34,138,3],"cmyk":[75,0,98,46],"hsb":[106,98,54],"hsl":[106,96,28],"lab":[50,-51,53]},{"name":"Celadon","hex":"abdbb2","rgb":[171,219,178],"cmyk":[22,0,19,14],"hsb":[129,22,86],"hsl":[129,40,76],"lab":[83,-24,15]}]

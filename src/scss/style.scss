@@ -1,4 +1,11 @@
-$main-color: #585858;
+$color1: #8dbd6d;
+$color2: #30ab7e;
+$color3: #b4e398;
+$color4: #228a03;
+$color5: #abdbb2;
+$fondo-claro: #eceaea;
+$fondo-orcuro: #382930;
+$sombras: #383838;
 $btn-primary: #00ced1;
 $btn-primary-dark: #05a1a7;
 $text-color-primary: white;
@@ -13,58 +20,133 @@ $text-color-h1: #dbd6d6;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 body {
-  background-color: $main-color;
-  color: $text-color-primary;
+  background-color: $fondo-claro;
+  font-family: "Josefin Sans";
   font-size: 20px;
-  width: 90%;
-  max-width: 1000px;
-  margin: auto;
+}
+
+div.container {
+  background-color: $color1;
+  width: 95%;
+  max-width: 1200px;
+  margin: 20px auto;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas: "header header header" "left left right " "footer footer footer
+  ";
 }
 
 header {
+  grid-area: header;
+  background-color: $color2;
+  grid-area: header;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  flex-basis: auto;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+ 
   div.logo {
-    font-size: 1.5em;
-    h1 {
-      margin-left: 15px;
-      font-size: 1.5em;
+    font-family: "Nerko One";
+    font-weight: 600;
+    font-size: 2em;
+    margin-left: 20px;
+    color: $color3;
+  }
+
+  nav {
+    margin-right: 20px;
+    a {
+      border-radius: 10px;
+      box-shadow: 3px 3px 5px $sombras;
+      text-decoration: none;
+      padding: 10px;
+      color: $fondo-claro;
+      margin: 35px, 0px;
+      background-color: $color4;
+      &:hover {
+        background-color: $color1;
+      }
     }
   }
-  nav {
-    padding-top: 20px;
-    height: auto;
-    justify-content: space-between;
+}
+
+main.left {
+  grid-area: left;
+  Article {
+    h1 {
+      margin-left: 10px;;
+      font-family: "Arial";
+    }
+    p {
+      text-align: justify;
+      line-height: 1.5;
+      margin: 10px 10px;
+      font-size: 1 em;
+    }
   }
 }
 
-.btn {
-  background-color: $btn-primary;
-  border-radius: 5px;
-  color: $text-color-primary;
+section.right {
+  div.cards {
+    border-radius: 10px;
+    background-color: white;
+    height: 150px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: initial;
+    h3 {
+      border-radius: 10px 0px 0px 5px;
+      font-family: "Nerko One";
+      font-size: 35px;
+      background-color: $color3;
+      color: $color4;
+      text-align: center;
+      font-weight: 100;
+    }
+    p {
+      font-size: 20px;
+      font-family: "Josefin Sans";
+      text-align: justify;
+    }
+    a{
+      width: 50%;   
+      align-items: center;
+
+      &.btn{
+        border-radius: 10px;
+        text-align: center;
+        color: $fondo-claro;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 800;
+        text-decoration: none;
+        padding: 10px;
+          background-color: $color4;
+        &:hover {
+          background-color: $color1;
+        }
+      }
+    }
+  }
+}
+
+section.right {
+  grid-area: right;
+}
+
+footer {
+  grid-area: footer;
+  background-color: $color2;
   padding: 10px;
-  text-decoration: none;
-  &:hover {
-	background-color: $btn-primary-dark;
-	color: #585858;
-  }
+  text-align: center;
+  font-family: Inconsolata;
+  font-weight: 700;
 }
 
-section.main{
-	text-align: justify;
-	font-size: 1em;
-	article{
-		margin-bottom: 30px;
-		h2{
-			color: #05a1a7;
-			font-size: 1.8em;
-			padding-bottom: 10px;
-		}
-	}
-}
+
